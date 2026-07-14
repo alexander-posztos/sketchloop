@@ -1,5 +1,7 @@
 # sketchloop
 
+[![skills.sh](https://skills.sh/b/alexander-posztos/sketchloop)](https://skills.sh/alexander-posztos/sketchloop)
+
 Sketchloop is an [agent skill](https://agentskills.io) that lets your coding agent create beautiful, hand-drawn-looking
 diagrams. Ask it to *"draw this as a hand-drawn diagram"* and you get back a real
 **image**: the agent writes a [D2](https://d2lang.com) text file, renders it to a sketchy
@@ -36,7 +38,14 @@ routes under [Requirements](#requirements)):
 brew install d2 resvg          # macOS / Homebrew on Linux
 ```
 
-Then the skill itself:
+Then the skill itself, either via [skills.sh](https://skills.sh/alexander-posztos/sketchloop)
+(installs into the harnesses it detects):
+
+```bash
+npx skills add alexander-posztos/sketchloop
+```
+
+or with the bundled installer:
 
 ```bash
 git clone https://github.com/alexander-posztos/sketchloop

@@ -1,6 +1,6 @@
 ---
 name: sketchloop
-description: Draw a hand-drawn-style diagram from a description and render it to an actual PNG: flowcharts, architecture, sequence/ER diagrams, graphs, mind maps, box-and-arrow layouts. Authors a D2 text file, renders it via a bundled script to a sketchy hand-drawn PNG offline (no browser), then reads the image back and fixes the diagram. Use when the user wants to draw, sketch, diagram, visualize, or "make a hand-drawn diagram" of something, or mentions D2 or a .d2 file.
+description: 'Draw a hand-drawn-style diagram from a description and render it to an actual PNG: flowcharts, architecture, sequence/ER diagrams, graphs, mind maps, box-and-arrow layouts. Authors a D2 text file, renders it via a bundled script to a sketchy hand-drawn PNG offline (no browser), then reads the image back and fixes the diagram. Use when the user wants to draw, sketch, diagram, visualize, or "make a hand-drawn diagram" of something, or mentions D2 or a .d2 file.'
 allowed-tools: Write, Edit, Bash, Read
 ---
 

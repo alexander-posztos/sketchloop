@@ -1,0 +1,52 @@
+# How the sketchloop skill works: author -> render (offline) -> look -> fix loop -> deliver.
+# Spine kept to <=5 nodes; render.sh internals folded into a container; the fix loop is a
+# cycle (look -> author), not a long chain.
+
+direction: down
+
+req: "draw me X" {
+  shape: oval
+  style.fill: "#fff3bf"
+  style.stroke: "#e8590c"
+  style.bold: true
+}
+
+cheat: cheatsheet {
+  shape: document
+  style.fill: "#eef1f8"
+}
+
+author: Author\n.d2 file {
+  style.fill: "#e3e9fd"
+  style.stroke: "#0d32b2"
+  style.bold: true
+}
+
+render: render.sh\n(offline) {
+  shape: hexagon
+  style.fill: "#eef1f8"
+  style.stroke: "#0d32b2"
+}
+
+look: Read PNG\n& judge {
+  shape: hexagon
+  style.fill: "#fff3bf"
+  style.stroke: "#e8590c"
+  style.bold: true
+}
+
+out: Deliver\n.png .svg .d2 {
+  shape: stored_data
+  style.fill: "#e3e9fd"
+  style.stroke: "#0d32b2"
+}
+
+req -> author
+cheat -> author: syntax
+author -> render: diagram.d2
+render -> look: PNG
+look -> author: fix & re-render {
+  style.stroke-dash: 4
+  style.stroke: "#e8590c"
+}
+look -> out: clean

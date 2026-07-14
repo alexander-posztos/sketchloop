@@ -1,0 +1,33 @@
+direction: down
+
+user: User {
+  shape: person
+  style.fill: "#fdf1d7"
+  style.stroke: "#a37a1f"
+}
+
+author: Agent writes .d2 text\n(this very diagram) {
+  shape: document
+}
+
+render: render.sh\nd2 --sketch, font swap,\nresvg to PNG {
+  shape: step
+  style.fill: "#e3e9fd"
+  style.stroke: "#0d32b2"
+}
+
+look: Agent reads the PNG\nchecks overlap, clipping,\ntopology
+
+deliver: Deliver .png, .svg, .d2\n(the image you are\nlooking at right now) {
+  shape: parallelogram
+  style.fill: "#e2f4e2"
+  style.stroke: "#1f7a1f"
+}
+
+user -> author: types /sketchloop\nhow does sketchloop work?
+author -> render
+render -> look
+look -> author: defects found,\nfix the .d2 {
+  style.stroke-dash: 4
+}
+look -> deliver: clean (2-3 passes max)

@@ -1,0 +1,32 @@
+# Peers, not a flow: a set of platform services with no strict order. `grid-columns` wraps
+# them into a balanced block with big labels. Grid places nodes in declaration order and
+# IGNORES edges for placement, so it's ideal for catalogs / tiers / matrices, never for an
+# ordered sequence (its arrows would zigzag). No edges here: peers don't connect in order.
+#
+# Setting BOTH grid-rows and grid-columns gives exact, uniform cells (no masonry packing).
+# Declaration order fills down each column, so grouping the classes (edge / service / data)
+# in declaration order lands each category in its own tidy column.
+
+classes: {
+  edge:    { style: { fill: "#fff3bf"; stroke: "#e8590c" } }
+  service: { style: { fill: "#e3e9fd"; stroke: "#0d32b2" } }
+  data:    { style: { fill: "#eef1f8"; stroke: "#5c7cfa" } }
+}
+
+platform: Platform Services {
+  grid-columns: 3       # 3 columns x 3 rows of uniform cells (see note above)
+  grid-rows: 3
+  grid-gap: 40
+
+  gateway:  API Gateway    { class: edge }
+  auth:     Auth           { class: edge }
+  cdn:      CDN            { class: edge }
+
+  orders:   Orders         { class: service }
+  payments: Payments       { class: service }
+  search:   Search         { class: service }
+
+  postgres: Postgres       { shape: cylinder; class: data }
+  redis:    Redis          { shape: cylinder; class: data }
+  blobs:    Object Store    { shape: cylinder; class: data }
+}

@@ -1,0 +1,49 @@
+# The sketchloop pipeline, drawn by sketchloop.
+# Author a .d2 -> render offline -> look at the PNG -> fix -> repeat.
+
+# Vertical flow (direction: down) keeps the render->look->fix loop near 2:1, not a wide strip.
+direction: down
+
+title: author -> render -> look -> fix {
+  shape: text
+  near: top-center
+  style.font-size: 24
+  style.bold: true
+}
+
+src: diagram.d2 {
+  shape: document
+  style.fill: "#eef1f8"
+}
+
+pipe: render.sh {
+  style.fill: "#e3e9fd"
+  style.stroke: "#0d32b2"
+  style.bold: true
+
+  sketch: d2 --sketch
+  rewrite: rewrite font\n-> Excalifont
+  resvg: resvg -> PNG
+
+  sketch -> rewrite -> resvg
+}
+
+png: diagram.png {
+  shape: page
+  style.fill: "#e3e9fd"
+  style.stroke: "#0d32b2"
+}
+
+look: look at\nthe PNG {
+  shape: hexagon
+  style.fill: "#fff3bf"
+  style.stroke: "#e8590c"
+}
+
+src -> pipe: render
+pipe -> png: write
+png -> look: Read image
+look -> src: fix & re-render {
+  style.stroke-dash: 4
+  style.stroke: "#e8590c"
+}

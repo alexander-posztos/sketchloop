@@ -1,0 +1,28 @@
+# Part 2 of 2: fulfillment. Continues from checkout-1-payment.d2 (triggered by a confirmed
+# payment). Another clean <=5-step sequence, kept short so it stays a balanced block, not a
+# strip. The back-order branch routes perpendicular to the spine for width and realism.
+
+direction: down
+
+classes: {
+  ok:   { style: { fill: "#e3e9fd"; stroke: "#0d32b2" } }
+  hold: { style: { fill: "#fff3bf"; stroke: "#e8590c"; stroke-dash: 3 } }
+}
+
+prev: from checkout-1-payment.d2 {
+  shape: parallelogram
+  style.fill: "#eef1f8"
+  style.stroke: "#888"
+}
+
+order: Order created { class: ok; style.bold: true }
+stock: In stock? { shape: diamond }
+ship:  Ship
+done:  Delivered { class: ok }
+back:  Backordered { class: hold }
+
+prev -> order { style.stroke-dash: 4; style.stroke: "#888" }
+order -> stock
+stock -> ship: yes
+stock -> back: no
+ship -> done

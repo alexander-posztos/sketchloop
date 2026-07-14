@@ -1,0 +1,4 @@
+# Keep the shell wrapper LF-only so a Windows checkout can't mangle the shebang.
+*.sh text eol=lf
+# The bundled font is binary; never normalize line endings.
+*.ttf binary

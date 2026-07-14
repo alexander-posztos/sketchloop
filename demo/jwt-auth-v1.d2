@@ -1,0 +1,18 @@
+direction: right
+browser: Browser { shape: person }
+login: Login Form
+api: Auth API
+check: Verify Credentials
+sign: Sign JWT\n(HS256)
+store: Store Token
+req: Authenticated Request
+verify: Verify Signature
+data: Protected Resource { shape: cylinder }
+browser -> login: credentials
+login -> api: POST /login
+api -> check
+check -> sign: valid
+sign -> store: token
+store -> req: Authorization header
+req -> verify
+verify -> data: allowed

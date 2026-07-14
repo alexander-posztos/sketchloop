@@ -1,0 +1,29 @@
+# Part 1 of 2: checkout & payment. The full order journey (browse -> ... -> delivered) is
+# ~8 steps; in one diagram that's a thin strip of tiny labels. So it's SPLIT into two linked
+# <=5-step sequences. This half ends at "Payment confirmed", where part 2 picks up. The
+# decline branch routes perpendicular to the spine, which also keeps the shape balanced.
+
+direction: down
+
+classes: {
+  ok:  { style: { fill: "#e3e9fd"; stroke: "#0d32b2" } }
+  err: { style: { fill: "#ffe3e3"; stroke: "#e03131"; stroke-dash: 3 } }
+}
+
+cart:     View Cart
+checkout: Checkout
+valid:    Card valid? { shape: diamond }
+paid:     Payment confirmed { class: ok; style.bold: true }
+declined: Declined { class: err }
+
+cart -> checkout -> valid
+valid -> paid: yes
+valid -> declined: no
+declined -> checkout: retry { style.stroke-dash: 3; style.stroke: "#e03131" }
+
+next: continues in\ncheckout-2-fulfillment.d2 {
+  shape: parallelogram
+  style.fill: "#eef1f8"
+  style.stroke: "#888"
+}
+paid -> next { style.stroke-dash: 4; style.stroke: "#888" }

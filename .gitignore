@@ -1,0 +1,9 @@
+# rendered outputs
+*.png
+*.svg
+!examples/*.png
+!examples/*.svg
+__pycache__/
+.DS_Store
+!demo/before-after.png
+.claude/

@@ -1,0 +1,47 @@
+# A typical web app architecture: containers, a datastore, an external service.
+# Vertical flow (direction: down) keeps a 4-tier stack near 2:1 instead of a wide strip.
+
+direction: down
+
+user: User { shape: person }
+
+edge: Edge {
+  cdn: CDN
+  lb: Load Balancer
+  cdn -> lb
+}
+
+app: Application {
+  style.fill: "#eef1f8"
+  web: Web Server
+  api: API Service
+  worker: Worker
+  web -> api: call
+  api -> worker: enqueue job
+}
+
+cache: Redis {
+  shape: cylinder
+  style.fill: "#e3e9fd"
+  style.stroke: "#0d32b2"
+}
+db: Postgres {
+  shape: cylinder
+  style.fill: "#e3e9fd"
+  style.stroke: "#0d32b2"
+}
+stripe: Stripe API {
+  shape: cloud
+  style.fill: "#eef1f8"
+  style.stroke: "#888"
+}
+
+user -> edge.cdn: HTTPS
+edge.lb -> app.web: route
+app.api -> cache: read {
+  style.stroke-dash: 3
+}
+app.worker -> db: persist
+app.api -> stripe: charge {
+  style.stroke: "#888"
+}

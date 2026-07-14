@@ -1,0 +1,21 @@
+direction: down
+browser: Browser { shape: person }
+
+issue: Issue token {
+  api: Auth API
+  check: Verify\nCredentials
+  sign: Sign JWT (HS256)
+  api -> check -> sign
+}
+
+use: Use token {
+  req: Authenticated\nRequest
+  verify: Verify Signature
+  data: Protected\nResource { shape: cylinder }
+  req -> verify
+  verify -> data: allowed
+}
+
+browser -> issue.api: POST /login
+issue.sign -> browser: token
+browser -> use.req: Authorization header
